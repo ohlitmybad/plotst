@@ -934,7 +934,7 @@ var circles = svg.selectAll("circle")
   .append("circle")
   .attr("cx", function(d) { return xScale(d[header.indexOf(xMetric)]); })
   .attr("cy", function(d) { return yScale(d[header.indexOf(yMetric)]); })
-  .attr("r", 5)
+  .attr("r", 7)
   .style("fill", "steelblue")
   .on("mouseover", function(d, i) {
     d3.select(this)
