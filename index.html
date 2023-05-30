@@ -1140,6 +1140,8 @@ var names = rows.slice(1).map(function(row) {
   return row.split(',')[1];
 });
 
+
+
 var searchBar = document.getElementById("search-bar");
 
 searchBar.addEventListener("input", function() {
@@ -1150,14 +1152,23 @@ searchBar.addEventListener("input", function() {
     return;
   }
 
+  searchTerm = removeSpecialCharsAndDiacritics(searchTerm);
+
   circles.classed("highlighted", false);
 
   circles.filter(function(d, i) {
-      return names[i].toLowerCase().includes(searchTerm);
+      var name = removeSpecialCharsAndDiacritics(names[i].toLowerCase());
+      return name.includes(searchTerm);
     })
     .classed("highlighted", true);
 });
 
+function removeSpecialCharsAndDiacritics(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/gi, "");
+}
+
+
+	
 
 
 var clickedCircles = []; // array to keep track of clicked circles
